@@ -13,7 +13,7 @@
 //	mandarino FILE...            the convert wheel under the mouse for FILE...
 //	mandarino --actions PATH...  the actions wheel: Bluetooth, Copy, Path, Move to…
 //
-// The wheel, the page picker and the progress tangerine are the same as on
+// The wheel, the page picker and the progress wheel are the same as on
 // Windows (ui_*.go); this file only runs them in an X11 window (x11_linux.go),
 // which also works on Wayland desktops through XWayland.
 package main
@@ -38,7 +38,7 @@ var appVersion = "dev"
 const usage = `Mandarino %s – offline file converter
 
 Usage:
-  mandarino FILE...            convert: open the tangerine wheel for the files
+  mandarino FILE...            convert: open the wheel for the files
   mandarino --actions PATH...  actions: Bluetooth, Copy, Path, Move to…
   mandarino --install          add Mandarino to your file manager's right-click menu
   mandarino --uninstall        remove it again
@@ -161,7 +161,7 @@ func runWheel(kind wheelKind, args []string) int {
 	}
 	action, files := out.Pick, m.files
 
-	// 2. the job, with the progress tangerine if it takes more than a moment
+	// 2. the job, with the progress wheel if it takes more than a moment
 	finished := make(chan struct{})
 	j := startJob(1, *action, files, cx, cy, func(*job) { close(finished) })
 	select {
@@ -254,7 +254,7 @@ func wheelLoop(w *xwin, m *wheelModel) Outcome {
 	}
 }
 
-// progressLoop shows the progress tangerine until the job ends. The window can
+// progressLoop shows the progress wheel until the job ends. The window can
 // be dragged, the × cancels the job and a right click hides it.
 func progressLoop(d displayPtr, j *job, scale float64, finished <-chan struct{}) {
 	m := newProgressModel(scale)
@@ -337,7 +337,7 @@ func notify(title, text string, isError bool) {
 }
 
 // screenshots renders the wheels, the page picker, the folder browser and the
-// progress tangerine to PNG files (used for the README).
+// progress wheel to PNG files (used for the README).
 func screenshots(dir string) error {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return err

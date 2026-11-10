@@ -187,7 +187,7 @@ func (c *gdiCanvas) Text(s string, x, y, w, h int, px float64, bold bool, col Co
 	})
 }
 
-// makeIcon draws the tangerine icon (see drawIcon) and returns an HICON for the tray.
+// makeIcon draws the wheel icon (see drawIcon) and returns an HICON for the tray.
 func makeIcon(size int) uintptr {
 	c := newCanvas(size, size, 0)
 	if c == nil {

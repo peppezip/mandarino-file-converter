@@ -11,7 +11,7 @@ First public release, for Windows 10/11 (64-bit) and Linux (x86-64).
 ### Added
 - Windows gesture: start dragging files in File Explorer or on the desktop and
   press **Shift** (convert) or **Ctrl** (actions); drop on a slice of the
-  tangerine that opens near the pointer. The other key switches tangerine,
+  wheel that opens near the pointer. The other key switches wheel,
   releasing elsewhere is a normal drag & drop, Esc cancels.
 - Linux: "Mandarino" and "Mandarino Actions" in the right-click menu of GNOME
   Files (Ctrl+Shift+M / Ctrl+Alt+M), Nemo, Caja, Dolphin and Thunar, plus
@@ -22,10 +22,10 @@ First public release, for Windows 10/11 (64-bit) and Linux (x86-64).
   M4A, OGG, Opus; PDF: pages to PNG/JPG, Merge, Split with a page picker.
 - Actions — Bluetooth (system transfer dialog, or Bluetooth settings), Copy
   (files to the clipboard), Path (paths to the clipboard), Move to… with a
-  folder browser inside the tangerine (rest on a folder to open it, drop on
+  folder browser inside the wheel (rest on a folder to open it, drop on
   "Move here").
-- The tangerine never goes off screen: near the edges it moves inwards.
-- Progress tangerine for long conversions (drag, × cancels, right click hides).
+- The wheel never goes off screen: near the edges it moves inwards.
+- Progress wheel for long conversions (drag, × cancels, right click hides).
 - Outputs never overwrite anything; half-written videos are named
   "… - in progress"; video outputs play everywhere (constant frame rate,
   even size, one stereo track).

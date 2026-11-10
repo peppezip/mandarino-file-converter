@@ -69,14 +69,14 @@ const helpText = `How to use Mandarino
 In File Explorer (or on the desktop) start dragging one or more files and,
 while still holding the mouse button:
 
-• press Shift to CONVERT them: the tangerine shows the formats;
+• press Shift to CONVERT them: the wheel shows the formats;
 • press Ctrl for ACTIONS: Bluetooth, Copy, Path (copy the path), Move to…
 
 Move onto a slice (it lights up) and release the mouse button.
-Press the other key to switch tangerine. Release anywhere else for a normal
+Press the other key to switch wheel. Release anywhere else for a normal
 drag & drop, or press Esc to cancel.
 
-Move to…: rest on it and the tangerine shows your folders. Rest on a folder to
+Move to…: rest on it and the wheel shows your folders. Rest on a folder to
 open it, "Up" goes back; drop on a folder (or on "Move here" in the middle).
 
 Conversions never touch the originals: the new file appears next to them.

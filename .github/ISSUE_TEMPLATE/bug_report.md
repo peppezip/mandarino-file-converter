@@ -11,7 +11,7 @@ A clear description of the problem.
 
 **How to reproduce**
 1. File(s): type and size (for example "screen recording, MP4, 2 min")
-2. Tangerine (Shift = convert, Ctrl = actions) and slice chosen:
+2. Wheel (Shift = convert, Ctrl = actions) and slice chosen:
 3. Error message shown (if any):
 
 **System**

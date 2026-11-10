@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// progressModel is the "progress tangerine": shown when an operation is not
+// progressModel is the "progress wheel": shown when an operation is not
 // instantaneous. Segments ripen one after the other (clockwise) as the job
 // advances; the cream panel in the middle shows the action, the percentage
 // and a progress bar. A small × on the peel cancels the job.
@@ -27,7 +27,7 @@ type progressModel struct {
 
 const progressSegments = 10
 
-// newProgressModel lays out a progress tangerine at the given DPI scale.
+// newProgressModel lays out a progress wheel at the given DPI scale.
 func newProgressModel(scale float64) *progressModel {
 	p := &progressModel{}
 	s := scale
@@ -67,7 +67,7 @@ func (p *progressModel) OverCancel(x, y int) bool {
 	return !p.done && math.Hypot(float64(x-bx), float64(y-by)) <= float64(br)+2
 }
 
-// Paint draws the progress tangerine.
+// Paint draws the progress wheel.
 func (p *progressModel) Paint(cv Canvas) {
 	s := p.scale
 	c := p.size / 2

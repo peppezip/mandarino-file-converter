@@ -9,7 +9,7 @@
 - **Conversions never modify the originals.** The new file is written next to
   them, with a name that does not overwrite anything.
 - **Files are moved only with "Move to…".** For every other drop on the
-  tangerine, Mandarino tells File Explorer that nothing happened.
+  wheel, Mandarino tells File Explorer that nothing happened.
 
 ## Why the Windows version watches the mouse and the keyboard
 
@@ -18,7 +18,7 @@ and keyboard hooks* (`hooks_windows.go`). Some antivirus programs flag any
 program that does this. The hooks:
 
 - only look at the left mouse button, the pointer position (to tell a drag
-  from a click), Shift and Ctrl; while a tangerine is open also at Esc, clicks
+  from a click), Shift and Ctrl; while a wheel is open also at Esc, clicks
   outside it and, in the page picker / folder browser, the few keys they use;
 - never store, log or send anything;
 - let every event through to the other programs, except those keys and the

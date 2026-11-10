@@ -7,7 +7,7 @@ import (
 	"unsafe"
 )
 
-// The progress tangerine on Windows (drawing and logic are in ui_progress.go).
+// The progress wheel on Windows (drawing and logic are in ui_progress.go).
 // It appears where the wheel was, can be dragged anywhere, the × cancels the
 // job and a right click hides it (the job keeps running).
 

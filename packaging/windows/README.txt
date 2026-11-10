@@ -14,14 +14,14 @@ INSTALL
 USE
 In File Explorer (or on the desktop) start dragging one or more files and,
 while still holding the mouse button:
-  - press Shift to CONVERT them (the tangerine shows the formats);
+  - press Shift to CONVERT them (the wheel shows the formats);
   - press Ctrl for ACTIONS: Bluetooth, Copy, Path, Move to...
 Move onto a slice (it lights up) and release the mouse button.
-Press the other key to switch tangerine; release elsewhere for a normal
-drag & drop; Esc cancels. Near the edges of the screen the tangerine moves
+Press the other key to switch wheel; release elsewhere for a normal
+drag & drop; Esc cancels. Near the edges of the screen the wheel moves
 inwards so it is never cut.
 
-Move to...: rest on it and the tangerine shows your folders (Desktop,
+Move to...: rest on it and the wheel shows your folders (Desktop,
 Documents, Downloads, drives...). Rest on a folder to open it, "Up" goes
 back, "More..." shows more folders. Drop on a folder, or on "Move here" in
 the middle.
@@ -31,7 +31,7 @@ Copy: the files go to the clipboard, paste them with Ctrl+V anywhere.
 Path: the full path goes to the clipboard.
 
 Conversions never touch the originals: the new file appears next to them.
-If a conversion takes a while, a smaller tangerine shows the progress:
+If a conversion takes a while, a smaller wheel shows the progress:
 drag it anywhere, the x cancels, a right click hides it.
 Nothing is uploaded: everything happens on your PC.
 
@@ -44,7 +44,7 @@ WHAT IT CONVERTS
 - Audio (MP3, WAV, FLAC, M4A, AAC, OGG, Opus, WMA, AIFF, AMR):
   to MP3, WAV, FLAC, M4A, OGG, Opus.
 - PDF: pages to PNG or JPG; Merge (several PDFs); Split: with one PDF the
-  tangerine asks "from page / to page" (click, mouse wheel or type the
+  wheel asks "from page / to page" (click, mouse wheel or type the
   numbers), then Extract (one PDF) or One per page.
 
 UNINSTALL

@@ -84,7 +84,7 @@ func KindOf(path string) Kind { return extKind[NormExt(path)] }
 // Action is one entry of the wheel.
 type Action struct {
 	ID    string // internal identifier understood by Run, e.g. "to:png"
-	Label string // short text shown inside a tangerine segment, e.g. "PNG"
+	Label string // short text shown inside a wheel segment, e.g. "PNG"
 	Desc  string // longer description used in notifications, e.g. "Convert to PNG"
 }
 

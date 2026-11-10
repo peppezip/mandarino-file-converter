@@ -8,7 +8,7 @@ import (
 	"mandarino/engine"
 )
 
-// The "Split" picker for a single PDF. Inside the tangerine the user chooses
+// The "Split" picker for a single PDF. Inside the wheel the user chooses
 // "from page" / "to page" (with − and + buttons, the mouse wheel, the arrow
 // keys or by typing digits), then:
 //
@@ -218,7 +218,7 @@ func (w *wheelModel) rangeKey(k Key) Outcome {
 	return Outcome{}
 }
 
-// paintRange draws the picker on top of a tangerine with 8 unlabelled segments.
+// paintRange draws the picker on top of a wheel with 8 unlabelled segments.
 func (w *wheelModel) paintRange(cv Canvas, c int) {
 	s, px := w.scale, w.px
 	w.draw(cv, c, 8, func(i int) segStyle { return segStyle{col: ripe(i), juice: 50} })

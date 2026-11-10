@@ -2,7 +2,7 @@ package main
 
 import "math"
 
-// fruit is the geometry of a tangerine cut in half, in physical pixels.
+// fruit is the geometry of a mandarin cut in half (the wheel), in physical pixels.
 // It is shared by the wheel and by the progress window.
 type fruit struct {
 	size    int     // side of the (square) window
@@ -20,7 +20,7 @@ type segStyle struct {
 	juice uint8   // opacity of the little juice drops
 }
 
-// Tangerine palette.
+// Wheel palette.
 var (
 	colPeel      = argb(255, 239, 108, 0)   // deep orange peel
 	colPith      = argb(255, 255, 244, 226) // white "albedo" under the peel

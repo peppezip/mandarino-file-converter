@@ -2,8 +2,8 @@ package main
 
 import "math"
 
-// The drawing code of Mandarino (the tangerine wheels, the page picker, the
-// folder browser and the progress tangerine) is shared by Windows and Linux.
+// The drawing code of Mandarino (the wheels, the page picker, the
+// folder browser and the progress wheel) is shared by Windows and Linux.
 // It only talks to this small Canvas interface, implemented with GDI+ on
 // Windows (gdip_windows.go) and with cairo on Linux (x11_linux.go).
 //

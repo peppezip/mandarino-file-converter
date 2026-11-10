@@ -16,7 +16,7 @@ import (
 // (docs/demo/*.gif and *.mp4) and the GitHub social preview image.
 //
 // The scenes are illustrations: a simple file window, a mouse pointer and the
-// dragged file are drawn here, while the tangerines are the real ones
+// dragged file are drawn here, while the wheels are the real ones
 // (wheelModel, progressModel) driven exactly as the Windows app drives them.
 // Frames are written as PNG files and assembled with ffmpeg.
 
@@ -25,7 +25,7 @@ const (
 	demoFPS      = 30
 )
 
-// shifted draws on another Canvas with an offset (to place a tangerine in the scene).
+// shifted draws on another Canvas with an offset (to place a wheel in the scene).
 type shifted struct {
 	Canvas
 	dx, dy int
@@ -70,7 +70,7 @@ type demoScene struct {
 	keyDown  bool
 	wheel    *wheelModel
 	progress *progressModel
-	cx, cy   int // centre of the tangerine on screen
+	cx, cy   int // centre of the wheel on screen
 	toastT   string
 	toastB   string
 }
@@ -217,7 +217,7 @@ func slicePoint(m *wheelModel, cx, cy, i int) [2]int {
 	return [2]int{cx + int(r*math.Cos(a)), cy + int(r*math.Sin(a))}
 }
 
-// hover moves the pointer over the tangerine and updates its highlight.
+// hover moves the pointer over the wheel and updates its highlight.
 func hover(st *demoScene) {
 	if st.wheel != nil {
 		st.wheel.Move(st.cursorX-(st.cx-st.wheel.size/2), st.cursorY-(st.cy-st.wheel.size/2))
@@ -282,7 +282,7 @@ func sceneConvert(tmp string) (float64, func(t float64) *demoScene) {
 				st.ghost = &files[0]
 			}
 		case t < 3.2:
-			st.caption = "2 · Press Shift: the tangerine opens"
+			st.caption = "2 · Press Shift: the wheel opens"
 			st.pressed, st.files[0].selected, st.ghost = true, true, &files[0]
 			st.key, st.keyDown = "Shift", t < 2.3
 			st.wheel = wheel
@@ -335,7 +335,7 @@ func sceneActions(tmp string) (float64, func(t float64) *demoScene) {
 	start, onFile, dropAt := [2]int{1050, 640}, [2]int{162, 210}, [2]int{900, 380}
 	cx, cy := 900, 380
 
-	// the tangerine goes through three states; build each one once
+	// the wheel goes through three states; build each one once
 	actions := newWheelModel(kindActions, []string{pdf}, 1)
 	moveTo := slicePoint(actions, cx, cy, indexOf(actions.acts, "op:move"))
 	placesWheel := newWheelModel(kindActions, []string{pdf}, 1)

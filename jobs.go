@@ -20,7 +20,7 @@ type job struct {
 	files   []string
 	started time.Time
 	cancel  context.CancelFunc
-	cx, cy  int // where the wheel was on screen (the progress tangerine appears there)
+	cx, cy  int // where the wheel was on screen (the progress wheel appears there)
 
 	mu     sync.Mutex // guards the fields below
 	index  int        // file being processed

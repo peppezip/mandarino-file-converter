@@ -8,13 +8,13 @@ file-manager integrations are all welcome.
 | Path | What it is |
 |------|------------|
 | `engine/` | All conversions, no user interface. Testable on any OS: `go test ./engine` |
-| `ui_wheel.go`, `ui_range.go`, `ui_folders.go`, `ui_progress.go`, `ui_fruit.go` | The tangerines (convert, actions, page picker, folder browser, progress): logic and drawing, shared by both platforms |
+| `ui_wheel.go`, `ui_range.go`, `ui_folders.go`, `ui_progress.go`, `ui_fruit.go` | The wheels (convert, actions, page picker, folder browser, progress): logic and drawing, shared by both platforms |
 | `ui_canvas.go` | The small `Canvas` interface the drawing code uses (GDI+ on Windows, cairo on Linux) |
 | `dragdetect.go` | Recognizes "dragging files + Shift/Ctrl" (pure logic, unit-tested) |
 | `jobs.go` | Runs a conversion in the background and summarizes the result |
 | **Windows** | |
 | `hooks_windows.go` | Low-level mouse/keyboard hooks feeding the drag detector |
-| `droptarget_windows.go` | The tangerine as an OLE drop target: dragged files, hover, drop, labels under the drag image |
+| `droptarget_windows.go` | The wheel as an OLE drop target: dragged files, hover, drop, labels under the drag image |
 | `wheel_windows.go`, `progress_windows.go` | The two layered (round, transparent) windows |
 | `fileops_windows.go`, `places_windows.go` | The Ctrl actions (clipboard, move, Bluetooth) and the places of the folder browser |
 | `gdip_windows.go` | GDI+ implementation of `Canvas` |
@@ -65,7 +65,7 @@ requires converting between `uintptr` and pointers on purpose.
 1. Add it to `fileActions()` in `ui_wheel.go` (ID `op:<name>`).
 2. Implement `<name>` in `runFileOp` in `fileops_windows.go` and `fileops_linux.go`.
 
-The tangerine adapts automatically to the number of slices (keep it under ~12).
+The wheel adapts automatically to the number of slices (keep it under ~12).
 
 ## Pull requests
 

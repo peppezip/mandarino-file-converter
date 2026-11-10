@@ -8,7 +8,7 @@ import (
 	"mandarino/engine"
 )
 
-// wheelModel is the platform-independent part of the tangerine wheel: layout,
+// wheelModel is the platform-independent part of the wheel: layout,
 // hit testing, mouse/keyboard handling and painting. The platform code creates
 // a window of wheelModel.size pixels, forwards input events and carries out
 // what the returned Outcome asks for.
@@ -23,7 +23,7 @@ import (
 //
 // On Windows the wheel opens while the user is still dragging the files,
 // before Windows says which files they are. Until then it is "pending": a
-// pale tangerine without labels; SetPaths fills it in.
+// pale wheel without labels; SetPaths fills it in.
 
 // Outcome tells the platform what to do after an input event.
 type Outcome struct {

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// The folder browser of "Move to…": the tangerine shows one folder per
+// The folder browser of "Move to…": the wheel shows one folder per
 // segment, so the user can walk through the file system without leaving the
 // gesture.
 //
@@ -24,7 +24,7 @@ const (
 	entFolder folderEntryKind = iota
 	entUp
 	entMore
-	entNone // empty filler segment (a tangerine needs at least 3 segments)
+	entNone // empty filler segment (a wheel needs at least 3 segments)
 )
 
 type folderEntry struct {

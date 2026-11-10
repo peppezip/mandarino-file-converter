@@ -22,11 +22,11 @@ On X11 the wheel opens under the mouse; on Wayland in the middle of the screen
 Notifications use notify-send (package libnotify-bin on Debian/Ubuntu).
 
 USE
-Select files, open Mandarino from the menu: the tangerine appears under the
+Select files, open Mandarino from the menu: the wheel appears under the
 mouse (moved inwards near the screen edges, never cut). Click a slice (or
 arrows + Enter, digits 1-9; Esc cancels).
 Convert: the new file is created next to the original. Long operations show
-a progress tangerine (drag it, x cancels, right click hides it).
+a progress wheel (drag it, x cancels, right click hides it).
 Actions: Move to... shows your folders: rest on a folder to open it, click
 "Move here" in the middle. Copy / Path put the files or their paths on the
 clipboard. Bluetooth uses bluetooth-sendto or blueman-sendto, or opens the

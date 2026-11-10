@@ -2,7 +2,7 @@
 
 // Mandarino for Windows: start dragging files in File Explorer, press Shift
 // (convert) or Ctrl (Bluetooth, copy, copy path, move to a folder) and drop
-// them on a segment of the tangerine wheel. Everything runs locally.
+// them on a segment of the wheel. Everything runs locally.
 //
 // Architecture (all files ending in _windows.go):
 //
@@ -11,7 +11,7 @@
 //   - droptarget_windows.go the wheel as an OLE drop target (dragged files, hover, drop)
 //   - com_windows.go       minimal COM helpers
 //   - wheel_windows.go     the wheel window (logic and drawing in ui_wheel.go / ui_range.go)
-//   - progress_windows.go  the progress tangerine (logic and drawing in ui_progress.go)
+//   - progress_windows.go  the progress wheel (logic and drawing in ui_progress.go)
 //   - fileops_windows.go   the Ctrl actions: clipboard, move, Bluetooth
 //   - places_windows.go    the places shown by the folder browser
 //   - tray_windows.go      notification-area icon, menu and notifications
@@ -54,7 +54,7 @@ const (
 const (
 	timerWatch     = 1 // closes the wheel if another window comes to the foreground
 	timerTooltip   = 2 // updates the tray tooltip while jobs run
-	timerShowProg  = 3 // shows the progress tangerine if a job is not instantaneous
+	timerShowProg  = 3 // shows the progress wheel if a job is not instantaneous
 	timerDropWatch = 4 // closes the wheel if a release on it was not followed by a Drop
 	timerDwell     = 5 // the pointer rested on "Move to…" or a folder: open it
 )
@@ -274,10 +274,10 @@ func launchJob(a engine.Action, files []string, cx, cy int) {
 	})
 	app.jobs[j.id] = j
 	pSetTimer.Call(app.hwnd, timerTooltip, 500, 0)
-	pSetTimer.Call(app.hwnd, timerShowProg, 400, 0) // instantaneous jobs never show the progress tangerine
+	pSetTimer.Call(app.hwnd, timerShowProg, 400, 0) // instantaneous jobs never show the progress wheel
 }
 
-// showNextProgress attaches the progress tangerine to the newest running job.
+// showNextProgress attaches the progress wheel to the newest running job.
 func showNextProgress() {
 	var newest *job
 	for _, j := range app.jobs {
