@@ -1,0 +1,46 @@
+name: Release
+
+# Push a tag like "v1.0.0" to build the Windows zip and the Linux tarball
+# (with ffmpeg and pdfium) and attach them to a GitHub release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04   # older glibc = the Linux binary runs on more distributions
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: System packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg pkg-config libx11-dev libxext-dev libcairo2-dev zip
+
+      - name: Download ffmpeg and pdfium
+        run: scripts/fetch-deps.sh all
+
+      - name: Test
+        run: MANDARINO_TOOLS=$PWD/third_party/linux go test ./...
+
+      - name: Build and package
+        run: scripts/build.sh "${GITHUB_REF_NAME#v}" all
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
+          body: |
+            **Windows 10/11 (64-bit):** download `Mandarino-…-windows-x64.zip`, extract it and run `Mandarino.exe`.
+            Then drag files in File Explorer and press **Shift** (convert) or **Ctrl** (Bluetooth, copy, path, move).
+            **Linux (x86-64):** download `mandarino-…-linux-x64.tar.gz`, extract it and run `./install.sh`.
+
+            See the README for details. Everything runs offline.

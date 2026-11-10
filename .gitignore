@@ -1,0 +1,14 @@
+# build output
+/dist/
+/build/
+*.exe
+/mandarino
+
+# downloaded helpers (scripts/fetch-deps.sh)
+/third_party/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

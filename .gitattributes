@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.syso binary
+*.png binary
+*.ico binary
+packaging/windows/README.txt text eol=crlf

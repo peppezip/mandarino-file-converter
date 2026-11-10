@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: System packages (ffmpeg for the tests, X11/cairo headers for the Linux build)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg pkg-config libx11-dev libxext-dev libcairo2-dev
+
+      - name: Download pdfium (enables the real PDF tests)
+        run: scripts/fetch-deps.sh linux
+
+      - name: gofmt
+        run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
+
+      - name: go vet (Linux and Windows)
+        run: |
+          go vet -unsafeptr=false ./...
+          GOOS=windows GOARCH=amd64 go vet -unsafeptr=false ./...
+
+      - name: Engine tests
+        run: MANDARINO_TOOLS=$PWD/third_party/linux go test -v ./...
+
+      - name: Build both platforms
+        run: |
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags "-H=windowsgui" -o /tmp/Mandarino.exe .
+          go build -o /tmp/mandarino .
