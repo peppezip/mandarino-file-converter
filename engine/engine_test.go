@@ -13,6 +13,8 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -239,9 +241,17 @@ func TestCompressScreenRecording(t *testing.T) {
 	// read the result back with "ffmpeg -i" (ffprobe is not bundled)
 	out, _ := exec.Command(ffmpegBin(t), "-hide_banner", "-i", r.Outputs[0]).CombinedOutput()
 	t.Logf("%s\n%s", filepath.Base(r.Outputs[0]), out)
-	s := string(out)
-	if !strings.Contains(s, "1920x1080") || !strings.Contains(s, "yuv420p") || strings.Count(s, "Audio:") != 1 {
-		t.Fatal("unexpected output")
+	// expected: H.264 yuv420p, 1920 px wide with an even height (the exact
+	// height depends on how the ffmpeg version rounds), exactly one audio track
+	video := regexp.MustCompile(`Stream #\d+:\d+.*Video: h264.*yuv420p.*, 1920x(\d+)`).FindStringSubmatch(string(out))
+	if video == nil {
+		t.Fatal("expected an H.264 yuv420p video 1920 px wide")
+	}
+	if h, _ := strconv.Atoi(video[1]); h%2 != 0 || h < 1076 || h > 1084 {
+		t.Fatalf("unexpected height %d", h)
+	}
+	if n := len(regexp.MustCompile(`Stream #\d+:\d+.*Audio:`).FindAllString(string(out), -1)); n != 1 {
+		t.Fatalf("expected one audio track, found %d", n)
 	}
 	if entries, _ := os.ReadDir(dir); len(entries) != 2 {
 		t.Fatalf("temporary files left behind: %v", entries)
