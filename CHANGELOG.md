@@ -4,6 +4,14 @@ All notable changes are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/) and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-11-10
+
+### Fixed
+- Converted and compressed videos are always "limited range" yuv420p: with
+  recent ffmpeg versions, full-range sources (screen recordings, some phones)
+  produced full-range files that some players show badly or refuse.
+- Tests no longer depend on the ffmpeg version installed on the system.
+
 ## [1.0.0] - 2026-11-09
 
 First public release, for Windows 10/11 (64-bit) and Linux (x86-64).

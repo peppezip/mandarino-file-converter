@@ -226,13 +226,17 @@ func targetFPS(fps float64) string {
 // even width and height, yuv420p colours and a single stereo AAC track.
 // maxW > 0 also limits the width (used by "Compress").
 func h264(info mediaInfo, crf string, maxW int, audioRate string) []string {
-	scale := "scale='trunc(iw/2)*2':'trunc(ih/2)*2'"
+	// out_range=tv: screen recordings and phone videos are often "full range"
+	// (yuvj420p). Recent ffmpeg versions keep that range unless asked, and some
+	// players show such files with wrong colours or refuse them, so the output
+	// is always converted to the standard "limited" range.
+	scale := "scale='trunc(iw/2)*2':'trunc(ih/2)*2':out_range=tv"
 	if maxW > 0 {
-		scale = fmt.Sprintf("scale='trunc(min(%d,iw)/2)*2':-2", maxW)
+		scale = fmt.Sprintf("scale='trunc(min(%d,iw)/2)*2':-2:out_range=tv", maxW)
 	}
 	return []string{
 		"-map", "0:v:0", "-map", "0:a:0?", "-map_metadata", "0",
-		"-vf", scale + ",format=yuv420p",
+		"-vf", scale + ",format=yuv420p", "-color_range", "tv",
 		"-fps_mode", "cfr", "-r", targetFPS(info.fps),
 		"-c:v", "libx264", "-preset", "medium", "-crf", crf, "-profile:v", "high",
 		"-c:a", "aac", "-b:a", audioRate, "-ac", "2", "-ar", "48000",
