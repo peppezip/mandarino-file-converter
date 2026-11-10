@@ -84,8 +84,18 @@ func jpegWithOrientation(t *testing.T, o uint16) []byte {
 	return append(out, b[2:]...)
 }
 
+// ffmpegBin returns the ffmpeg used by the engine (bundled copy first), so the
+// tests behave the same everywhere, even where the system ffmpeg is old.
+func ffmpegBin(t *testing.T) string {
+	bin, err := FFmpegPath()
+	if err != nil {
+		t.Skip("ffmpeg not available")
+	}
+	return bin
+}
+
 func setup(t *testing.T) (string, context.Context) {
-	if _, err := exec.LookPath("ffmpeg"); err != nil {
+	if _, err := FFmpegPath(); err != nil {
 		t.Skip("ffmpeg not available")
 	}
 	dir := t.TempDir()
@@ -174,7 +184,7 @@ func TestImages(t *testing.T) {
 func TestMedia(t *testing.T) {
 	dir, ctx := setup(t)
 	vid := filepath.Join(dir, "clip.mov")
-	cmd := exec.Command("ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc=size=320x240:rate=25:duration=2",
+	cmd := exec.Command(ffmpegBin(t), "-v", "error", "-f", "lavfi", "-i", "testsrc=size=320x240:rate=25:duration=2",
 		"-f", "lavfi", "-i", "sine=frequency=440:duration=2", "-c:v", "mpeg4", "-c:a", "pcm_s16le", "-shortest", vid)
 	if out, err := cmd.CombinedOutput(); err != nil {
 		t.Fatalf("%v %s", err, out)
@@ -214,7 +224,7 @@ func TestMedia(t *testing.T) {
 func TestCompressScreenRecording(t *testing.T) {
 	dir, ctx := setup(t)
 	rec := filepath.Join(dir, "Registrazione 2026-09-24 165304.mp4")
-	cmd := exec.Command("ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc2=size=2560x1441:rate=60:duration=3",
+	cmd := exec.Command(ffmpegBin(t), "-v", "error", "-f", "lavfi", "-i", "testsrc2=size=2560x1441:rate=60:duration=3",
 		"-f", "lavfi", "-i", "sine=duration=3", "-f", "lavfi", "-i", "sine=frequency=880:duration=3",
 		"-map", "0:v", "-map", "1:a", "-map", "2:a",
 		"-vf", "select='not(mod(n\\,3))+not(mod(n\\,7))',setpts=N/(37*TB)+random(0)*0.004/TB,crop=2559:1441",
@@ -226,11 +236,11 @@ func TestCompressScreenRecording(t *testing.T) {
 	if len(r.Failed) > 0 {
 		t.Fatal(r.Failed[0].Err)
 	}
-	out, _ := exec.Command("ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height,pix_fmt,r_frame_rate,avg_frame_rate,level,channels",
-		"-of", "compact", r.Outputs[0]).CombinedOutput()
+	// read the result back with "ffmpeg -i" (ffprobe is not bundled)
+	out, _ := exec.Command(ffmpegBin(t), "-hide_banner", "-i", r.Outputs[0]).CombinedOutput()
 	t.Logf("%s\n%s", filepath.Base(r.Outputs[0]), out)
 	s := string(out)
-	if !strings.Contains(s, "width=1920") || !strings.Contains(s, "pix_fmt=yuv420p") || strings.Count(s, "codec_type=audio") != 1 {
+	if !strings.Contains(s, "1920x1080") || !strings.Contains(s, "yuv420p") || strings.Count(s, "Audio:") != 1 {
 		t.Fatal("unexpected output")
 	}
 	if entries, _ := os.ReadDir(dir); len(entries) != 2 {

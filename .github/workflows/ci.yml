@@ -21,7 +21,7 @@ jobs:
           sudo apt-get install -y ffmpeg pkg-config libx11-dev libxext-dev libcairo2-dev
 
       - name: Download pdfium (enables the real PDF tests)
-        run: scripts/fetch-deps.sh linux
+        run: bash scripts/fetch-deps.sh linux
 
       - name: gofmt
         run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)

@@ -25,13 +25,13 @@ jobs:
           sudo apt-get install -y ffmpeg pkg-config libx11-dev libxext-dev libcairo2-dev zip
 
       - name: Download ffmpeg and pdfium
-        run: scripts/fetch-deps.sh all
+        run: bash scripts/fetch-deps.sh all
 
       - name: Test
         run: MANDARINO_TOOLS=$PWD/third_party/linux go test ./...
 
       - name: Build and package
-        run: scripts/build.sh "${GITHUB_REF_NAME#v}" all
+        run: bash scripts/build.sh "${GITHUB_REF_NAME#v}" all
 
       - name: Publish the release
         uses: softprops/action-gh-release@v2
