@@ -155,7 +155,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for a map of the source code.
 Requirements: [Go 1.22+](https://go.dev/dl/). For the Linux build also cgo and `sudo apt install libx11-dev libxext-dev libcairo2-dev`.
 
 ```sh
-git clone https://github.com/<you>/mandarino-file-converter.git
+git clone https://github.com/peppezip/mandarino-file-converter.git
 cd mandarino-file-converter
 
 GOOS=windows GOARCH=amd64 go build -ldflags "-H=windowsgui" -o Mandarino.exe .   # Windows (from any OS)
